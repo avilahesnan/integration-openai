@@ -15,8 +15,8 @@ def load(name_archive):
         with open(name_archive, "r") as archive:
             data = archive.read()
             return data
-    except IOError as e:
-        print(f"Erro: {e}")
+    except IOError as err:
+        print(f"Erro: {err}")
 
 prompt_system = """
 Identifique o perfil de compra para cada cliente a seguir.
@@ -38,7 +38,7 @@ if number_tokens >= 4096 - expected_output_size:
 
 print(f"Modelo escolhido: {model}")
 
-lista_mensagens = [
+list_messages = [
         {
             "role": "system",
             "content": prompt_system
@@ -49,9 +49,9 @@ lista_mensagens = [
         }
     ]
 
-resposta = client.chat.completions.create(
-    messages = lista_mensagens,
+response = client.chat.completions.create(
+    messages = list_messages,
     model=model
 )
 
-print(resposta.choices[0].message.content)
+print(response.choices[0].message.content)
